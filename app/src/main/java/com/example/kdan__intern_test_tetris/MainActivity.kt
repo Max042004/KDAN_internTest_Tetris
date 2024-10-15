@@ -35,6 +35,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             KDAN__intern_Test_TetrisTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    Level.reset()
+                    Tetromino.newPiece()
+                    Level.insertNewPosition()
                     TetrisGame(
                         modifier = Modifier.padding(innerPadding)
                     )
@@ -48,14 +51,11 @@ class MainActivity : ComponentActivity() {
 fun TetrisGame(modifier: Modifier = Modifier) {
     var gameState by remember { mutableStateOf(0) }
 
-    Level.reset()
-    Tetromino.newPiece()
-    Level.insertNewPosition()
-
     LaunchedEffect(key1 = Unit) {
         while (true) {
-            Tetromino.newPiece()
-            Level.insertNewPosition()
+            //Tetromino.newPiece()      如果把這兩行函式只要放在TetrisGame裡面，
+            //Level.insertNewPosition() 即使沒有放在LanunchedEffect裡，一樣會0.5秒重新呼叫一次
+            Falling.fallingStep()
             delay(500) // wait 0.5 second
             gameState++ // 重新渲染
         }
@@ -71,7 +71,7 @@ val height = 22 * blockSize
 
 @Composable
 fun CanvasView(gameState: Int, modifier: Modifier = Modifier) {
-
+    var temp:Int = 0
     Column(modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally) {
         Canvas(modifier = Modifier
@@ -80,7 +80,7 @@ fun CanvasView(gameState: Int, modifier: Modifier = Modifier) {
             for(i in 0..21){
                 for(j in 0..9){
                     var tetrominoColor:Color = Color.Red
-                    //Level.Z[i][j] = gameState % 9
+                    temp = gameState % 9
                     when (Level.Z[i][j]) {
                         0 -> tetrominoColor = Color.Transparent
                         1 -> {

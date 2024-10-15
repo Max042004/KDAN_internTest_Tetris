@@ -82,6 +82,7 @@ class Level {
 
         // NON VARIABLES X coordinates - for drawing
         // first two level is hidden
+        //原本的寫法只有10*20，我把它改成10*22，所以X,Y array才會有幾行註解，而在螢幕上面多的兩行用來顯示新生成tetromino
         val X = arrayOf(
             //arrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
             //arrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
