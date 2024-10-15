@@ -48,8 +48,14 @@ class MainActivity : ComponentActivity() {
 fun TetrisGame(modifier: Modifier = Modifier) {
     var gameState by remember { mutableStateOf(0) }
 
+    Level.reset()
+    Tetromino.newPiece()
+    Level.insertNewPosition()
+
     LaunchedEffect(key1 = Unit) {
         while (true) {
+            Tetromino.newPiece()
+            Level.insertNewPosition()
             delay(500) // wait 0.5 second
             gameState++ // 重新渲染
         }
@@ -71,9 +77,10 @@ fun CanvasView(gameState: Int, modifier: Modifier = Modifier) {
         Canvas(modifier = Modifier
             .padding(16.dp)
             .size(width, height)) {
-            for(i in 2..21){
+            for(i in 0..21){
                 for(j in 0..9){
                     var tetrominoColor:Color = Color.Red
+                    //Level.Z[i][j] = gameState % 9
                     when (Level.Z[i][j]) {
                         0 -> tetrominoColor = Color.Transparent
                         1 -> {
@@ -88,7 +95,7 @@ fun CanvasView(gameState: Int, modifier: Modifier = Modifier) {
                         8 -> tetrominoColor = Color.Green       // Z
                     }
                     drawRect(color = tetrominoColor,
-                        topLeft = Offset(x= Level.X[i][j], y = Level.Y[i][j]+3* tetrominoSize),
+                        topLeft = Offset(x= Level.X[i][j], y = Level.Y[i][j]+ tetrominoSize), //y + tetrominoSize是為了將map向下降
                         size = Size(tetrominoSize, tetrominoSize)
                     )
                 }
