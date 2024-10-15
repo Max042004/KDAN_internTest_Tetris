@@ -160,5 +160,81 @@ class Level {
             arrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
             arrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
         )
+
+        // reset level
+        fun reset() {
+            level = 1
+            score = 0
+            Tetromino.speed = 500
+
+            Tetromino.next2Shape = (1..7).random()
+            Tetromino.next3Shape = (1..7).random()
+            Tetromino.next4Shape = (1..7).random()
+
+            // level clear
+            for (i in 0..21) {
+                for (j in 0..9) {
+                    Z[i][j] = 0
+                }
+            }
+        }
+
+        // if tetromino cant entered
+        fun isGameOver(): Boolean {
+            for (i in Tetromino.tetromino_Xpos) {
+                if (i < 2) {
+                    return true
+                }
+            }
+            return false
+        }
+
+        fun checkRows() {
+            for ((index, i) in Z.withIndex()) {
+                if (i[0] > 1 &&
+                    i[1] > 1 &&
+                    i[2] > 1 &&
+                    i[3] > 1 &&
+                    i[4] > 1 &&
+                    i[5] > 1 &&
+                    i[6] > 1 &&
+                    i[7] > 1 &&
+                    i[8] > 1 &&
+                    i[9] > 1
+                ) {
+                    removeRow(index)
+                    score += 1
+                    if (score % 10 == 0) {
+                        level++
+                        Tetromino.speed -= 50
+                    }
+
+                }
+            }
+        }
+
+        fun removeRow(index: Int) {
+            // clean that row
+            for (i in 0..9)
+                Z[index][i] = 0
+            // correct remained rows
+            for (i in index downTo 2)
+                Z[i] = Z[i - 1].also { Z[i - 1] = Z[i] } // swap
+        }
+
+        fun insertNewPosition() {
+
+            Z[Tetromino.tetromino_Xpos[0]][Tetromino.tetromino_Ypos[0]] = Tetromino.colorCode
+            Z[Tetromino.tetromino_Xpos[1]][Tetromino.tetromino_Ypos[1]] = Tetromino.colorCode
+            Z[Tetromino.tetromino_Xpos[2]][Tetromino.tetromino_Ypos[2]] = Tetromino.colorCode
+            Z[Tetromino.tetromino_Xpos[3]][Tetromino.tetromino_Ypos[3]] = Tetromino.colorCode
+        }
+
+        fun removeOldPosition() {
+            Z[Tetromino.tetromino_Xpos[0]][Tetromino.tetromino_Ypos[0]] = 0
+            Z[Tetromino.tetromino_Xpos[1]][Tetromino.tetromino_Ypos[1]] = 0
+            Z[Tetromino.tetromino_Xpos[2]][Tetromino.tetromino_Ypos[2]] = 0
+            Z[Tetromino.tetromino_Xpos[3]][Tetromino.tetromino_Ypos[3]] = 0
+        }
     }
 }
