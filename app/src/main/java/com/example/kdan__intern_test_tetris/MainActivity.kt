@@ -53,7 +53,6 @@ fun CanvasView(name: String, modifier: Modifier = Modifier) {
         Canvas(modifier = Modifier
             .padding(16.dp)
             .size(width, height)) {
-        val Block = Paint()
 
         for(i in 2..21){
             for(j in 0..9){
