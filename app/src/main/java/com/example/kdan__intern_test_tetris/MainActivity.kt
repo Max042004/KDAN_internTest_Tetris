@@ -58,7 +58,7 @@ fun CanvasView(name: String, modifier: Modifier = Modifier) {
         for(i in 2..21){
             for(j in 0..9){
                 drawRect(color = Color.Red,
-                         topLeft = Offset(x= Level.X[i][j], y = Level.Y[i][j]),
+                         topLeft = Offset(x= Level.X[i][j], y = Level.Y[i][j]+3* tetrominoSize),
                          size = Size(tetrominoSize, tetrominoSize)
                 )
             }
