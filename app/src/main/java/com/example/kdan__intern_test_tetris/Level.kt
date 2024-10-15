@@ -83,8 +83,8 @@ class Level {
         // NON VARIABLES X coordinates - for drawing
         // first two level is hidden
         val X = arrayOf(
-            arrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
-            arrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
+            //arrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
+            //arrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
             arrayOf(0f, 80f, 160f, 240f, 320f, 400f, 480f, 560f, 640f, 720f),
             arrayOf(0f, 80f, 160f, 240f, 320f, 400f, 480f, 560f, 640f, 720f),
             arrayOf(0f, 80f, 160f, 240f, 320f, 400f, 480f, 560f, 640f, 720f),
@@ -104,14 +104,16 @@ class Level {
             arrayOf(0f, 80f, 160f, 240f, 320f, 400f, 480f, 560f, 640f, 720f),
             arrayOf(0f, 80f, 160f, 240f, 320f, 400f, 480f, 560f, 640f, 720f),
             arrayOf(0f, 80f, 160f, 240f, 320f, 400f, 480f, 560f, 640f, 720f),
-            arrayOf(0f, 80f, 160f, 240f, 320f, 400f, 480f, 560f, 640f, 720f)
+            arrayOf(0f, 80f, 160f, 240f, 320f, 400f, 480f, 560f, 640f, 720f),
+            arrayOf(0f, 80f, 160f, 240f, 320f, 400f, 480f, 560f, 640f, 720f),
+            arrayOf(0f, 80f, 160f, 240f, 320f, 400f, 480f, 560f, 640f, 720f),
         )
 
         // NON VARIABLES Y coordinates - for drawing
         // first two level is hidden
         val Y = arrayOf(
-            arrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
-            arrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
+            //arrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
+            //arrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
             arrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f),
             arrayOf(80f, 80f, 80f, 80f, 80f, 80f, 80f, 80f, 80f, 80f),
             arrayOf(160f, 160f, 160f, 160f, 160f, 160f, 160f, 160f, 160f, 160f),
@@ -131,7 +133,9 @@ class Level {
             arrayOf(1280f, 1280f, 1280f, 1280f, 1280f, 1280f, 1280f, 1280f, 1280f, 1280f),
             arrayOf(1360f, 1360f, 1360f, 1360f, 1360f, 1360f, 1360f, 1360f, 1360f, 1360f),
             arrayOf(1440f, 1440f, 1440f, 1440f, 1440f, 1440f, 1440f, 1440f, 1440f, 1440f),
-            arrayOf(1520f, 1520f, 1520f, 1520f, 1520f, 1520f, 1520f, 1520f, 1520f, 1520f)
+            arrayOf(1520f, 1520f, 1520f, 1520f, 1520f, 1520f, 1520f, 1520f, 1520f, 1520f),
+            arrayOf(1600f, 1600f, 1600f, 1600f, 1600f, 1600f, 1600f, 1600f, 1600f, 1600f),
+            arrayOf(1680f, 1680f, 1680f, 1680f, 1680f, 1680f, 1680f, 1680f, 1680f, 1680f),
         )
 
         // VARIABLE Z - if(value == 1111) draw outside the canvas, else inside
@@ -223,7 +227,6 @@ class Level {
         }
 
         fun insertNewPosition() {
-
             Z[Tetromino.tetromino_Xpos[0]][Tetromino.tetromino_Ypos[0]] = Tetromino.colorCode
             Z[Tetromino.tetromino_Xpos[1]][Tetromino.tetromino_Ypos[1]] = Tetromino.colorCode
             Z[Tetromino.tetromino_Xpos[2]][Tetromino.tetromino_Ypos[2]] = Tetromino.colorCode
