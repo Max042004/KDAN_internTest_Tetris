@@ -141,6 +141,7 @@ class Level {
 
         // VARIABLE Z - if(value == 1111) draw outside the canvas, else inside
         // first two level is hidden
+        //the value represent the color
         var Z = mutableListOf(
             arrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
             arrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
@@ -192,6 +193,16 @@ class Level {
                 }
             }
             return false
+        }
+
+        fun gameOver(){
+            for (i in 0..21) {
+                for (j in 0..9) {
+                    if(Z[i][j] != 0){
+                        Z[i][j] = 1
+                    }
+                }
+            }
         }
 
         fun checkRows() {
