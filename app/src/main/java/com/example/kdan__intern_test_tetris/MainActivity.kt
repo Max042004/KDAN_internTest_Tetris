@@ -91,6 +91,9 @@ fun TetrisGame(modifier: Modifier = Modifier) {
         Row(){
             CanvasView(gameState = gameState, modifier = modifier.wrapContentSize())
             Column {
+                Spacer(modifier = Modifier.size(80.dp))
+                Text(text = "Best")
+                Text(text = Level.score.toString())
             }
         }
         Spacer(modifier = Modifier.size(10.dp))
