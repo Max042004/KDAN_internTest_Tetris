@@ -1,6 +1,7 @@
 package com.example.kdan__intern_test_tetris
 
 
+import android.R.attr.delay
 import android.R.attr.height
 import android.R.attr.width
 import android.content.Context
@@ -28,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -37,7 +39,9 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.kdan__intern_test_tetris.ui.theme.KDAN__intern_Test_TetrisTheme
 import kotlinx.coroutines.delay
 
@@ -49,7 +53,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             KDAN__intern_Test_TetrisTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Level.reset()
                     TetrisGame(
                         modifier = Modifier
                             .padding(innerPadding)
@@ -65,35 +68,16 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun TetrisGame(modifier: Modifier = Modifier) {
     var gameState by remember { mutableIntStateOf(0) }
-    LaunchedEffect(Unit) {
-        Tetromino.newPiece()
-        Level.insertNewPosition()
-        while (true) {
-            if(Falling.willLanding(1)){
-                Level.checkRows()
-                if(Level.isGameOver()){
-                    Level.gameOver()
-                    break
-                }
-                Tetromino.newPiece()
-                Level.insertNewPosition()
-            }
-            else{
-                Falling.fallingStep()
-            }
-            delay(500) // wait 0.5 second
-            gameState++ // 重新渲染
-        }
-    }
-
+    var gameOver by remember { mutableStateOf(true) }
 
     Column(modifier = Modifier) {
         Row(){
             CanvasView(gameState = gameState, modifier = modifier.wrapContentSize())
+            Spacer(modifier = Modifier.size(20.dp))
             Column {
                 Spacer(modifier = Modifier.size(80.dp))
-                Text(text = "Best")
-                Text(text = Level.score.toString())
+                Text(text = "Best", fontSize = 30.sp)
+                Text(text = Level.score.toString(), fontSize = 30.sp)
             }
         }
         Spacer(modifier = Modifier.size(10.dp))
@@ -101,7 +85,7 @@ fun TetrisGame(modifier: Modifier = Modifier) {
             Column(horizontalAlignment = Alignment.CenterHorizontally){
                 Row{
                     Image(modifier = Modifier
-                        .clickable {
+                        .clickable(enabled = gameOver) {
                             if (MoveLeft.isMovableLeft()) {
                                 MoveLeft.moveLeft()
                                 gameState++
@@ -111,7 +95,7 @@ fun TetrisGame(modifier: Modifier = Modifier) {
                         painter = painterResource(id = R.drawable.move_left), contentDescription = "move_left")
                     Spacer(modifier = Modifier.size(35.dp))
                     Image(modifier = Modifier
-                        .clickable {
+                        .clickable(enabled = gameOver) {
                             if (MoveRight.isMovableRight()) {
                                 MoveRight.moveRight()
                                 gameState++
@@ -122,7 +106,7 @@ fun TetrisGame(modifier: Modifier = Modifier) {
                 }
                 Spacer(modifier = Modifier.size(5.dp))
                 Image(modifier = Modifier
-                    .clickable {
+                    .clickable(enabled = gameOver) {
                         if (!Falling.willLanding(1)) {
                             Falling.fallingStep()
                             gameState++
@@ -135,7 +119,7 @@ fun TetrisGame(modifier: Modifier = Modifier) {
             Column{
                 Spacer(modifier = Modifier.size(35.dp))
                 Image(modifier = Modifier
-                    .clickable {
+                    .clickable(enabled = gameOver) {
                         if (Rotate.isRotable()) {
                             Rotate.doRotate()
                             gameState++
@@ -145,6 +129,41 @@ fun TetrisGame(modifier: Modifier = Modifier) {
                     painter = painterResource(id = R.drawable.rotate), contentDescription = "rotate")
             }
 
+        }
+    }
+
+
+    LaunchedEffect(Unit) {
+        //opening animation
+        for(i in 0..21){
+            for(j in 0..9) {
+                Level.Z[i][j] = i % 8
+            }
+            gameState++
+            delay(70)
+        }
+        Level.reset()
+        Tetromino.newPiece()
+        Level.insertNewPosition()
+        while (true) {
+            gameState++ // 重新渲染
+            delay(500)
+            if(Falling.willLanding(1)){
+                Level.checkRows()
+                if(Level.isGameOver()){
+                    Level.gameOver()
+                    gameState++
+                    gameOver = false
+                    break
+                }
+                else{
+                    Tetromino.newPiece()
+                    Level.insertNewPosition()
+                }
+            }
+            else{
+                Falling.fallingStep()
+            }
         }
     }
 }
@@ -189,7 +208,7 @@ fun CanvasView(gameState: Int, modifier: Modifier = Modifier) {
     }
 }
 
-fun Float.pxToDp(context: Context): Float =
+private fun Float.pxToDp(context: Context): Float =
     (this / (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT))
 
 

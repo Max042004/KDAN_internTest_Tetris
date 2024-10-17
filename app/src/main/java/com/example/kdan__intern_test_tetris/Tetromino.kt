@@ -20,6 +20,7 @@ class Tetromino {
             when (nextShape) {
                 1 -> {
                     actualShape = "I"
+                    shapeDirection = 1
                     colorCode = 2
                     tetromino_Xpos = arrayOf(0, 0, 0, 0)
                     tetromino_Ypos = arrayOf(3, 4, 5, 6)
@@ -30,6 +31,7 @@ class Tetromino {
                 2 -> {
                     actualShape = "O"
                     colorCode = 2
+                    shapeDirection = 1
                     tetromino_Xpos = arrayOf(0, 0, 1, 1)
                     tetromino_Ypos = arrayOf(4, 5, 4, 5)
                     //  .  .  .  .  0  1  .  .  .  .
