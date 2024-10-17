@@ -36,8 +36,8 @@ class MainActivity : ComponentActivity() {
             KDAN__intern_Test_TetrisTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Level.reset()
-                    Tetromino.newPiece()
-                    Level.insertNewPosition()
+                    //Tetromino.newPiece()
+                    //Level.insertNewPosition()
                     TetrisGame(
                         modifier = Modifier.padding(innerPadding)
                     )
@@ -48,14 +48,28 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun TetrisGame(modifier: Modifier = Modifier) {
-    var gameState by remember { mutableStateOf(0) }
+fun TetrisGame(modifier: Modifier){
+    tetrisGame()
+}
 
+@Composable
+fun tetrisGame(modifier: Modifier = Modifier) {
+    var gameState by remember { mutableStateOf(0) }
     LaunchedEffect(key1 = Unit) {
+        Tetromino.newPiece()
+        Level.insertNewPosition()
         while (true) {
-            //Tetromino.newPiece()      如果把這兩行函式只要放在TetrisGame裡面，
-            //Level.insertNewPosition() 即使沒有放在LanunchedEffect裡，一樣會0.5秒重新呼叫一次
-            Falling.fallingStep()
+            if(Falling.willLanding(1)){
+                Level.checkRows()
+                if(Level.isGameOver()){
+                    Level.reset()
+                }
+                Tetromino.newPiece()
+                Level.insertNewPosition()
+            }
+            else{
+                Falling.fallingStep()
+            }
             delay(500) // wait 0.5 second
             gameState++ // 重新渲染
         }

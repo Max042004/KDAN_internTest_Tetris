@@ -14,6 +14,7 @@ class Tetromino {
         var shapeDirection = 0
         var speed: Long = 500
 
+        //在新增新方塊的座標，在game map最上方
         fun newPiece() {
             nextShape = (1..7).random()
             when (nextShape) {
