@@ -47,13 +47,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun TetrisGame(modifier: Modifier){
-    tetrisGame()
-}
 
 @Composable
-fun tetrisGame(modifier: Modifier = Modifier) {
+fun TetrisGame(modifier: Modifier = Modifier) {
     var gameState by remember { mutableStateOf(0) }
     LaunchedEffect(key1 = Unit) {
         Tetromino.newPiece()
