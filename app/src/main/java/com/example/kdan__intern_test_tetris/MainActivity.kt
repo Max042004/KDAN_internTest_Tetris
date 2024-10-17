@@ -65,14 +65,15 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun TetrisGame(modifier: Modifier = Modifier) {
     var gameState by remember { mutableIntStateOf(0) }
-    LaunchedEffect(key1 = Unit) {
+    LaunchedEffect(Unit) {
         Tetromino.newPiece()
         Level.insertNewPosition()
         while (true) {
             if(Falling.willLanding(1)){
                 Level.checkRows()
                 if(Level.isGameOver()){
-                    Level.reset()
+                    Level.gameOver()
+                    break
                 }
                 Tetromino.newPiece()
                 Level.insertNewPosition()
