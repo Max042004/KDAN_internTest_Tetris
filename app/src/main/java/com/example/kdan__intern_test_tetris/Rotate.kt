@@ -295,9 +295,6 @@ class Rotate {
                     }
                 }
             }
-            // GHOST
-            // set ghost
-            //TetrominoGhost.setGhost()
         }
 
         ////////////////////////////////////////////////////////

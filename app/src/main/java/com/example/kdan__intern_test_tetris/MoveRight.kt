@@ -21,9 +21,6 @@ class MoveRight {
             Level.Z[Tetromino.tetromino_Xpos[1]][Tetromino.tetromino_Ypos[1]] = Tetromino.colorCode
             Level.Z[Tetromino.tetromino_Xpos[2]][Tetromino.tetromino_Ypos[2]] = Tetromino.colorCode
             Level.Z[Tetromino.tetromino_Xpos[3]][Tetromino.tetromino_Ypos[3]] = Tetromino.colorCode
-
-            // set ghost
-            //TetrominoGhost.setGhost()
         }
 
         // if there obsticle (wall or piece) then cant move left

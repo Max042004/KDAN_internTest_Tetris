@@ -1,9 +1,6 @@
 package com.example.kdan__intern_test_tetris
 
 
-import android.R.attr.delay
-import android.R.attr.height
-import android.R.attr.width
 import android.content.Context
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -13,7 +10,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,7 +17,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.waterfallPadding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -39,7 +34,6 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kdan__intern_test_tetris.ui.theme.KDAN__intern_Test_TetrisTheme
@@ -183,7 +177,7 @@ fun CanvasView(gameState: Int, modifier: Modifier = Modifier) {
             .wrapContentSize()) {
             for(i in 0..21){
                 for(j in 0..9){
-                    temp = gameState % 9
+                    temp = gameState % 9 //這個composable function必須要用到state，這樣在state改變時才會重新呼叫
                     var tetrominoColor:Color = Color.Red
                     when (Level.Z[i][j]) {
                         0 -> tetrominoColor = Color.Transparent
