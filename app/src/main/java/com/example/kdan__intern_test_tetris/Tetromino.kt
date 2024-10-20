@@ -8,9 +8,6 @@ class Tetromino {
         var actualShape = ""
         var colorCode: Int = 0
         var nextShape = 0
-        var next2Shape = 0
-        var next3Shape = 0
-        var next4Shape = 0
         var shapeDirection = 0
         var speed: Long = 500
 
@@ -30,7 +27,7 @@ class Tetromino {
 
                 2 -> {
                     actualShape = "O"
-                    colorCode = 2
+                    colorCode = 3
                     shapeDirection = 1
                     tetromino_Xpos = arrayOf(0, 0, 1, 1)
                     tetromino_Ypos = arrayOf(4, 5, 4, 5)

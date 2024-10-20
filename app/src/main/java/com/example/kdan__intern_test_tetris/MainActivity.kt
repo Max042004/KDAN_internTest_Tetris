@@ -141,7 +141,7 @@ fun TetrisGame(modifier: Modifier = Modifier) {
         Level.insertNewPosition()
         while (true) {
             gameState++ // 重新渲染
-            delay(500)
+            delay(Tetromino.speed)
             if(Falling.willLanding(1)){
                 Level.checkRows()
                 if(Level.isGameOver()){

@@ -98,10 +98,6 @@ class Level {
             score = 0
             Tetromino.speed = 500
 
-            Tetromino.next2Shape = (1..7).random()
-            Tetromino.next3Shape = (1..7).random()
-            Tetromino.next4Shape = (1..7).random()
-
             // level clear
             for (i in 0..21) {
                 for (j in 0..9) {
@@ -145,9 +141,9 @@ class Level {
                 ) {
                     removeRow(index)
                     score += 1
-                    if (score % 10 == 0) {
+                    if (score % 10 == 0 && Tetromino.speed > 100) {
                         level++
-                        Tetromino.speed -= 50
+                        Tetromino.speed -= 100
                     }
 
                 }
