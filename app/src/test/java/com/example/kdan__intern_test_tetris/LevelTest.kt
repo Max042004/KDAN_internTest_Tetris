@@ -1,12 +1,12 @@
 package com.example.kdan__intern_test_tetris
 
+import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
+
 
 class LevelTest {
-
-    @BeforeEach //每次測試前重置
+    @Before //每次測試前重置
     fun setUp(){
         Tetromino.tetromino_Xpos = arrayOf(0, 0, 0, 0)
         Tetromino.tetromino_Ypos = arrayOf(0, 0, 0, 0)

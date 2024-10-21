@@ -1,11 +1,11 @@
 package com.example.kdan__intern_test_tetris
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.RepeatedTest
 
 class TetrominoTest {
-    @Test
+
     @RepeatedTest(100)
     fun newPieceTest(){
         //arrange
